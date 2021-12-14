@@ -1,0 +1,152 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap');
+
+html,body{
+    margin: 0px;
+    padding: 0px;
+}
+
+*{
+    transition-duration: 100ms;
+    transition-timing-function: ease-in-out;
+}
+
+.main{
+    font-family: 'Montserrat', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    height: 100vh;
+    background-color: rgb(15, 15, 30);
+    color: white;
+    font-size: calc(4px + 1vw);
+}
+
+.HAlign{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-evenly;
+    text-align: center;
+    max-width: 90vw;
+}
+
+button{
+    border-radius: 5px;
+    border-color: transparent;
+    cursor: pointer;
+    margin: 5px;
+    box-shadow: black 0px 0px 10px;
+}
+button:hover{
+    transform: scale(1.05);
+}
+button:active{
+    transform:scale(0.95);
+}
+
+.btn-blue{
+    background-color: rgb(103, 159, 255);
+}
+.btn-green{
+    background-color: rgb(103, 255, 121);
+}
+.btn-red{
+    background-color: rgb(255, 103, 103);
+}
+
+.pubkey-input{
+    max-width: 70vw;
+    min-width: 44vw;
+    border-radius: 5px;
+    border-color: transparent;
+    margin-inline: 5px;
+    box-shadow: black 0px 0px 10px;
+}
+
+.derived-key-list{
+    overflow: scroll;
+    max-height: 60vh;
+    margin-bottom: 5px;
+    
+}
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+.derived-key-item{
+    border-radius: 5px;
+    background-color: rgb(30, 30, 40);
+    box-shadow: black 0px 0px 10px;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 15px;
+    
+}
+
+
+.popup {
+  display: none;
+  position: fixed; 
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgb(0,0,0);
+  background-color: rgba(0, 0, 0, 0.25); 
+}
+
+.popup-content {
+    position: relative;
+    background-color: rgba(30, 30, 40, 0.9);
+    border-radius: 5px;
+    margin: auto;
+    width: 80%;
+    top:15%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
+}
+
+.close {
+    color: white;
+    float: right;
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.close:hover {
+    transform: scale(1.2);
+}
+.close:active {
+    transform: scale(0.8);
+}
+
+.popup-header {
+    padding: 2px 16px;
+    border-radius: 5px 5px 0px 0px;
+    background-color: rgb(15, 15, 30);
+    color: white;
+}
+
+
+.popup-body {
+    padding: 2px 16px;
+    overflow-wrap: break-word;
+}
+
+.popup-footer {
+    padding: 2px 16px;
+    background-color: #5cb85c;
+    color: white;
+}
+
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 15%; opacity: 1}
+}

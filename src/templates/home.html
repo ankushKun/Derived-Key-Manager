@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+
+{% block main %}
+<div class="HAlign">
+    <img src="../static/media/deso.png" width="40px">
+    <h1>Derived Key Manager</h1><br>
+</div>
+
+<div class="HAlign hidden-on-login">
+    <button class="btn-green" onclick="login()">Login with DeSo</button>
+    <!-- <h3> or enter public key</h3> -->
+</div>
+<!-- <form class="pubkey-form hidden-on-login">
+            <input class="pubkey-input" type="text" minlength="55" maxlength="55" placeholder="Public key here ;)"
+                required>
+            <button type="submit" class="btn-blue pubkey-go">GO</button>
+        </form> -->
+<br><br>
+<p class="list-keys-for"></p>
+<div class="HAlign show-on-login" style="display: none;">
+    <button class="btn-green" onclick="createDerivedKey()">Create new derived key</button>
+    <button class="btn-red" onclick="logout()">Logout</button>
+</div>
+<br>
+
+<div id="show-keys" class="popup">
+    <div class="popup-content">
+        <div class="popup-header">
+            <span class="close">&times;</span>
+            <h2>Derived key generated</h2>
+            <h4>Make sure you copy and store these in a safe place<br><strong>You wont be able to see these tokens after
+                    closing this popup</strong></h4>
+        </div>
+        <div class="popup-body">
+
+        </div>
+        <!-- <div class="popup-footer">
+            <h3>Footer</h3>
+        </div> -->
+    </div>
+
+</div>
+
+<div class="derived-key-list">
+    <!-- ITEMS INSERTED HERE -->
+</div>
+{% endblock %}
