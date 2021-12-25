@@ -29,5 +29,26 @@ def newDerivedKey():
     return str(res.status_code)
 
 
+@app.route("/deleteDerivedKey", methods=["POST"])
+def deleteDerivedKey():
+    data = request.get_json()
+    authorize_endpoint = BASE + "authorize-derived-key"
+    payload = data["payload"]
+    res = requests.post(authorize_endpoint, json=payload)
+    # print(res.json())
+    TransactionHex = res.json()["TransactionHex"]
+    return TransactionHex
+
+
+@app.route("/submitTransaction", methods=["POST"])
+def submit():
+    data = request.get_json()
+    signedTxnHex = data["transactionHex"]
+    submit_endpoint = BASE + "submit-transaction"
+    res = requests.post(
+        submit_endpoint, json={"TransactionHex": signedTxnHex})
+    return str(res.status_code)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

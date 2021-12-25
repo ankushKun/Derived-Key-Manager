@@ -52,15 +52,20 @@ async function handleLogin(payload) {
             $(".show-on-login").show();
             getDerivedKeys();
         }
-        //  else if (payload.signedTransactionHex) {
-        //     // console.log(payload);
-        //     const signedHex = payload.signedTransactionHex;
-        //     axios.post("/submitTransaction", { transactionHex: signedHex })
-        //         .then((e) => {
-        //             console.log("submit transaction ");
-        //             console.log(e.data);
-        //         });
-        // }
+        else if (payload.signedTransactionHex) {
+            // console.log(payload);
+            const signedHex = payload.signedTransactionHex;
+            axios.post("/submitTransaction", { "transactionHex": signedHex })
+                .then((e) => {
+                    if (e.data == "200") {
+                        alert("Revoked access from a derived key!");
+                        getDerivedKeys();
+                    } else {
+                        alert(`Failed to revoke access\nError ${e.data}`);
+                        getDerivedKeys();
+                    }
+                });
+        }
         else {
             window.location.reload();
         }
@@ -154,18 +159,25 @@ window.addEventListener('message', message => {
 //     }
 // });
 
-
+let validOnly = true;
 async function getDerivedKeys() {
+    console.log("Getting derived keys");
     $(".list-keys-for").text("Showing derived keys for " + loggedInPubKey);
     getDerivedEndpoint = BASE + "get-user-derived-keys";
     axios.post(getDerivedEndpoint, { "PublicKeyBase58Check": loggedInPubKey }).then((e) => {
         const keys = e.data.DerivedKeys;
         // console.log(keys);
+        $(".key-count").html(`You have ${Object.keys(keys).length} Derived Keys in total`);
         $(".derived-key-list").empty();
+        let validKeyCount = 0;
         for (let key in keys) {
             // console.log(key);
+            if (keys[key].IsValid) { validKeyCount++ }
+            $(".key-count").html(`You have ${Object.keys(keys).length} Derived Keys in total<br>Of which ${validKeyCount} is Valid`);
             const validity = keys[key].IsValid ? "Valid Key" : "Invalid Key";
-            $(".derived-key-list").append(`<div class="derived-key-item HAlign">
+            if (validOnly) {
+                if (keys[key].IsValid) {
+                    $(".derived-key-list").append(`<div class="derived-key-item HAlign">
                 <div>
                     <p>${key}</p>
                     <div class="HAlign">
@@ -173,9 +185,24 @@ async function getDerivedKeys() {
                         <p>${validity}</p>
                     </div>
                 </div>
-                <button class="btn-red">delete</button>
+                <button class="btn-red" onclick="deleteKey('${key}',${keys[key].ExpirationBlock})">delete</button>
                 </div>`
-            )
+                    );
+                }
+
+            } else {
+                $(".derived-key-list").append(`<div class="derived-key-item HAlign">
+                <div>
+                    <p>${key}</p>
+                    <div class="HAlign">
+                        <p>Expires at block ${keys[key].ExpirationBlock}</p>
+                        <p>${validity}</p>
+                    </div>
+                </div>
+                <button class="btn-red" onclick="deleteKey('${key}',${keys[key].ExpirationBlock})">delete</button>
+                </div>`
+                );
+            }
         }
         if (Object.keys(keys).length <= 0) {
             $(".derived-key-list").append(`<div class="derived-key-item HAlign">
@@ -184,6 +211,36 @@ async function getDerivedKeys() {
             )
         }
     });
+}
+
+//////////// DELETE DKEY
+function deleteKey(derivedPublicKey, expirationBlock) {
+    let accessSignature = prompt("Access Signature for the key you want to delete?", "");
+    console.log(accessSignature)
+    if (accessSignature === "") {
+        alert("You have to provide the Access Signature to delete a derived key");
+        return
+    } else if (accessSignature == null) {
+        return
+    }
+    endpoint = "/deleteDerivedKey"
+    payload = {
+        payload: {
+            "OwnerPublicKeyBase58Check": loggedInPubKey,
+            "DerivedPublicKeyBase58Check": derivedPublicKey,
+            "ExpirationBlock": expirationBlock,
+            "AccessSignature": accessSignature,
+            "DeleteKey": true,
+            "MinFeeRateNanosPerKB": 1000
+        }
+    }
+    if (confirm("Are you sure you want to revoke access from this derived key?")) {
+        axios.post(endpoint, payload).then((res) => {
+            const TxnHex = res.data;
+            console.log(TxnHex);
+            approveTxn(TxnHex);
+        })
+    }
 }
 
 
