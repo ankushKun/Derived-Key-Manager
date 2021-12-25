@@ -7,8 +7,8 @@ Functions :
 - Revoking derived keys
 
 TODO :
-- Add something to TODO
 
+- Add something to TODO
 
 ## Installation
 
