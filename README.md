@@ -13,6 +13,7 @@ TODO :
 ## Installation
 
 ```bash
+cd src
 pip3 install -r requirements.txt
 ```
 
