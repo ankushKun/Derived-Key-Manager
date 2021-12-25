@@ -4,10 +4,11 @@ Functions :
 
 - List all derived public keys for a deso public key
 - Generate a new Derived key
+- Revoking derived keys
 
 TODO :
+- Add something to TODO
 
-- Revoking derived keys
 
 ## Installation
 
