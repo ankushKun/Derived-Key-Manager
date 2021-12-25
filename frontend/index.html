@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+
+</head>
+
+<body>
+    <div class="main">
+        <div class="HAlign">
+            <img src="media/deso.png" width="40px">
+            <h1>Derived Key Manager</h1><br>
+        </div>
+
+        <div class="HAlign hidden-on-login">
+            <button class="btn-green" onclick="login()">Login with DeSo</button>
+            <!-- <h3> or enter public key</h3> -->
+        </div>
+        <!-- <form class="pubkey-form hidden-on-login">
+                    <input class="pubkey-input" type="text" minlength="55" maxlength="55" placeholder="Public key here ;)"
+                        required>
+                    <button type="submit" class="btn-blue pubkey-go">GO</button>
+                </form> -->
+        <br><br>
+        <p class="list-keys-for"></p>
+        <div class="HAlign show-on-login" style="display: none;">
+            <button class="btn-green" onclick="createDerivedKey()">Create new derived key</button>
+            <button class="btn-red" onclick="logout()">Logout</button>
+        </div>
+        <p class="key-count"></p>
+        <br>
+
+        <div id="show-keys" class="popup">
+            <div class="popup-content">
+                <div class="popup-header">
+                    <span class="close">&times;</span>
+                    <h2>Derived key generated</h2>
+                    <h4>Make sure you copy and store these in a safe place<br><strong>You wont be able to see these
+                            tokens after
+                            closing this popup</strong></h4>
+                </div>
+                <div class="popup-body">
+
+                </div>
+                <!-- <div class="popup-footer">
+                    <h3>Footer</h3>
+                </div> -->
+            </div>
+
+        </div>
+
+        <div class="derived-key-list">
+            <!-- ITEMS INSERTED HERE -->
+        </div>
+    </div>
+    <iframe id="identity" title="identity" frame-border="0" src="https://identity.deso.org/embed?v=2"
+        style="display:none"></iframe>
+
+    <!-- JQUERY -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+        integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- AXIOS -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <!-- SCRIPTS -->
+    <script src="js/signing.js"></script>
+    <script src="js/login.js"></script>
+</body>
+
+</html>

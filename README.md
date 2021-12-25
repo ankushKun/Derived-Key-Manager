@@ -1,11 +1,11 @@
 # Derived Key Manager
 
-Functions : 
+Functions :
 
 - List all derived public keys for a deso public key
 - Generate a new Derived key
 
-TODO : 
+TODO :
 
 - Revoking derived keys
 
