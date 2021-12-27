@@ -1,13 +1,35 @@
 {
-  "version":2,
-  "builds":[{
-    "src":"app.py", "use":"@vercel/python",
-    "config":{
-      "runtime": "python3.9",
-      "wsgiApplicationName": "app"
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.9",
+        "wsgiApplicationName": "app"
+      }
+    },
+    {
+      "src": "*.html",
+      "use": "@vercel/static"
     }
-  }],
-  "routes":[{
-    "src":"/(.*)", "dest":"app.py"
-  }]
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "templates/home.html"
+    },
+    {
+      "src": "/submitTransaction",
+      "dest": "app.py"
+    },
+    {
+      "src": "/deleteDerivedKey",
+      "dest": "app.py"
+    },
+    {
+      "src": "/newDerivedKey",
+      "dest": "app.py"
+    }
+  ]
 }

@@ -8,7 +8,7 @@ app = Flask(__name__)
 BASE = "https://bitclout.com/api/v0/"
 
 
-@app.route("/")
+@app.route("/", methods=["GET"])
 def home():
     return render_template("home.html")
 
