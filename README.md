@@ -8,12 +8,13 @@ Functions :
 
 TODO :
 
-- Add something to TODO
+- Fixing Derived key authorisation issues in STATIC_APP
+- Deploy STATIC_APP on github pages
 
 ## Installation
 
 ```bash
-cd src
+cd FLASK_APP
 pip3 install -r requirements.txt
 ```
 
