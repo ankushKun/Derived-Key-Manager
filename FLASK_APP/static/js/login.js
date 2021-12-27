@@ -204,9 +204,9 @@ async function getDerivedKeys() {
                 );
             }
         }
-        if (Object.keys(keys).length <= 0) {
+        if (validKeyCount <= 0) {
             $(".derived-key-list").append(`<div class="derived-key-item HAlign">
-                <p>No derived key found for this user</p>
+                <p>No valid derived key found for this user</p>
                 </div>`
             )
         }

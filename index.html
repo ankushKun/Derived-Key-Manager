@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/style.css">
-
+    <link rel="stylesheet" href="STATIC_PAGE/css/style.css">
+    <link rel="shortcut icon" href="STATIC_PAGE/media/deso.png" type="image/x-icon">
+    <title>Derived Keys</title>
 </head>
 
 <body>
     <div class="main">
         <div class="HAlign">
-            <img src="media/deso.png" width="40px">
+            <img src="STATIC_PAGE/media/deso.png" width="40px">
             <h1>Derived Key Manager</h1><br>
         </div>
 
@@ -28,10 +29,11 @@
         <br><br>
         <p class="list-keys-for"></p>
         <div class="HAlign show-on-login" style="display: none;">
+            <button class="btn-green" onclick="getDerivedKeys()">⟳</button>
             <button class="btn-green" onclick="createDerivedKey()">Create new derived key</button>
             <button class="btn-red" onclick="logout()">Logout</button>
         </div>
-        <p class="key-count"></p>
+        <p class="key-count show-on-login">&gt;_&lt;</p>
         <br>
 
         <div id="show-keys" class="popup">
@@ -68,8 +70,8 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- SCRIPTS -->
-    <script src="js/signing.js"></script>
-    <script src="js/login.js"></script>
+    <script src="STATIC_PAGE/js/signing.js"></script>
+    <script src="STATIC_PAGE/js/login.js"></script>
 </body>
 
 </html>

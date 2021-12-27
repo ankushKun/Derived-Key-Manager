@@ -168,8 +168,9 @@ window.addEventListener('message', message => {
 //     }
 // });
 
-
+let validOnly = true;
 async function getDerivedKeys() {
+    console.log("Getting derived keys");
     $(".list-keys-for").text("Showing derived keys for " + loggedInPubKey);
     getDerivedEndpoint = BASE + "get-user-derived-keys";
     axios.post(getDerivedEndpoint, { "PublicKeyBase58Check": loggedInPubKey }).then((e) => {
@@ -177,10 +178,15 @@ async function getDerivedKeys() {
         // console.log(keys);
         $(".key-count").html(`You have ${Object.keys(keys).length} Derived Keys`);
         $(".derived-key-list").empty();
+        let validKeyCount = 0;
         for (let key in keys) {
             // console.log(key);
+            if (keys[key].IsValid) { validKeyCount++ }
+            $(".key-count").html(`You have ${Object.keys(keys).length} Derived Keys in total<br>Of which ${validKeyCount} is Valid`);
             const validity = keys[key].IsValid ? "Valid Key" : "Invalid Key";
-            $(".derived-key-list").append(`<div class="derived-key-item HAlign">
+            if (validOnly) {
+                if (keys[key].IsValid) {
+                    $(".derived-key-list").append(`<div class="derived-key-item HAlign">
                 <div>
                     <p>${key}</p>
                     <div class="HAlign">
@@ -190,11 +196,26 @@ async function getDerivedKeys() {
                 </div>
                 <button class="btn-red" onclick="deleteKey('${key}',${keys[key].ExpirationBlock})">delete</button>
                 </div>`
-            )
+                    );
+                }
+
+            } else {
+                $(".derived-key-list").append(`<div class="derived-key-item HAlign">
+                <div>
+                    <p>${key}</p>
+                    <div class="HAlign">
+                        <p>Expires at block ${keys[key].ExpirationBlock}</p>
+                        <p>${validity}</p>
+                    </div>
+                </div>
+                <button class="btn-red" onclick="deleteKey('${key}',${keys[key].ExpirationBlock})">delete</button>
+                </div>`
+                );
+            }
         }
-        if (Object.keys(keys).length <= 0) {
+        if (validKeyCount <= 0) {
             $(".derived-key-list").append(`<div class="derived-key-item HAlign">
-                <p>No derived key found for this user</p>
+                <p>No valid derived key found for this user</p>
                 </div>`
             )
         }
