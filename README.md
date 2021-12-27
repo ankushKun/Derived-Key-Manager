@@ -1,7 +1,5 @@
 # Derived Key Manager
 
-## Hosted at [weeblet.pythonanywhere.com](https://weeblet.pythonanywhere.com/)
-
 Functions :
 
 - List all derived public keys for a deso public key
