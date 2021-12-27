@@ -1,5 +1,4 @@
 from flask import Flask, request
-from flask.helpers import url_for
 from flask.templating import render_template
 import requests
 from deso.Sign import Sign_Transaction
@@ -50,6 +49,6 @@ def submit():
     return str(res.status_code)
 
 
-#if __name__ == "__main__":
+# if __name__ == "__main__":
 #    app.debug = False
 #    app.run(host="0.0.0.0", port=5000)

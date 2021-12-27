@@ -1,12 +1,9 @@
 {
-  "name":"Derived Keys Manager",
   "version":2,
   "builds":[{
-    "src":"*py",
-    "use":"@liudonghua123/now-flask"
+    "src":"main.py", "use":"@now/python"
   }],
   "routes":[{
-    "src":"(.*)",
-    "dest":"index.py"
+    "src":"/(.*)", "dest":"main.py"
   }]
 }
