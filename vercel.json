@@ -1,9 +1,13 @@
 {
   "version":2,
   "builds":[{
-    "src":"main.py", "use":"@now/python"
+    "src":"app.py", "use":"@vercel/python",
+    "config":{
+      "runtime": "python3.9",
+      "wsgiApplicationName": "app"
+    }
   }],
   "routes":[{
-    "src":"/(.*)", "dest":"main.py"
+    "src":"/(.*)", "dest":"app.py"
   }]
 }
